@@ -6,6 +6,7 @@ import numpy as np
 import os
 from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 from tensorflow.python.framework import graph_util
+import tfcoreml as tf_converter
 
 
 
@@ -171,12 +172,19 @@ constant_graph=graph_util.convert_variables_to_constants(sess,sess.graph_def,['o
 
 print(sess.run(result2,feed_dict={eval_input:test_x_data}))
 
+
+
+#生成pb模型
 with tf.gfile.FastGFile('saved_model/HWModel.pb', mode='wb') as f:
     f.write(constant_graph.SerializeToString())
 
 
 
 
+#将pb模型转换成mlmodel，可应用于ios的CoreML
+tf_converter.convert(tf_model_path='saved_model/HWModel.pb',
+                     mlmodel_path='saved_model/HWModel.mlmodel',
+                     output_feature_names=['op_to_store:0'],input_name_shape_dict={"eval_input:0":[1,32,32,1]})
 
 
 
