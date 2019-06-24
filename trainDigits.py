@@ -174,6 +174,13 @@ print(sess.run(result2,feed_dict={eval_input:test_x_data}))
 
 
 
+
+saver=tf.train.Saver()  # 不传入参数代表默认存入全部参数
+file_name = 'saved_model/model.ckpt'  # 将保存到当前目录下的的saved_model文件夹下model.ckpt文件
+saver.save(sess,file_name )  # 保存好的模型文件
+
+
+
 #生成pb模型
 with tf.gfile.FastGFile('saved_model/HWModel.pb', mode='wb') as f:
     f.write(constant_graph.SerializeToString())
