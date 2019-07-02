@@ -1,0 +1,172 @@
+{
+  "storage" : "model.espresso.weights",
+  "properties" : {
+
+  },
+  "format_version" : 200,
+  "layers" : [
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "Relu_3:0",
+      "blob_weights" : 3,
+      "K" : 1,
+      "blob_biases" : 1,
+      "name" : "Conv2D_2:0",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 25,
+      "bottom" : "eval_input__0",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 4,
+      "pad_value" : 0,
+      "Ny" : 4,
+      "n_parallel" : 1
+    },
+    {
+      "pad_value" : 0,
+      "average_count_exclude_padding" : 1,
+      "top_shape_style" : 0,
+      "avg_or_max" : 1,
+      "stride_x" : 4,
+      "pad_mode" : 1,
+      "stride_y" : 4,
+      "pad_t" : 0,
+      "weights" : {
+
+      },
+      "size_y" : 4,
+      "type" : "pool",
+      "pad_r" : 0,
+      "pad_b" : 0,
+      "size_x" : 4,
+      "pad_fill_mode" : 0,
+      "bottom" : "Relu_3:0",
+      "pad_l" : 0,
+      "name" : "MaxPool_2:0",
+      "top" : "MaxPool_2:0"
+    },
+    {
+      "pad_r" : 0,
+      "fused_relu" : 1,
+      "fused_tanh" : 0,
+      "pad_fill_mode" : 0,
+      "pad_b" : 0,
+      "pad_l" : 0,
+      "top" : "Relu_4:0",
+      "blob_weights" : 7,
+      "K" : 25,
+      "blob_biases" : 5,
+      "name" : "Conv2D_3:0",
+      "has_batch_norm" : 0,
+      "type" : "convolution",
+      "n_groups" : 1,
+      "pad_t" : 0,
+      "has_biases" : 1,
+      "C" : 50,
+      "bottom" : "MaxPool_2:0",
+      "weights" : {
+
+      },
+      "pad_mode" : 1,
+      "Nx" : 4,
+      "pad_value" : 0,
+      "Ny" : 4,
+      "n_parallel" : 1
+    },
+    {
+      "pad_value" : 0,
+      "average_count_exclude_padding" : 1,
+      "top_shape_style" : 0,
+      "avg_or_max" : 1,
+      "stride_x" : 4,
+      "pad_mode" : 1,
+      "stride_y" : 4,
+      "pad_t" : 0,
+      "weights" : {
+
+      },
+      "size_y" : 4,
+      "type" : "pool",
+      "pad_r" : 0,
+      "pad_b" : 0,
+      "size_x" : 4,
+      "pad_fill_mode" : 0,
+      "bottom" : "Relu_4:0",
+      "pad_l" : 0,
+      "name" : "MaxPool_3:0",
+      "top" : "MaxPool_3:0"
+    },
+    {
+      "name" : "Reshape_1:0",
+      "bottom" : "MaxPool_3:0",
+      "dst_n" : 0,
+      "mode" : 1,
+      "dst_seq" : 1,
+      "dst_k" : 200,
+      "weights" : {
+
+      },
+      "top" : "Reshape_1:0",
+      "dst_h" : 1,
+      "dst_w" : 1,
+      "type" : "reshape"
+    },
+    {
+      "nB" : 200,
+      "top" : "Relu_5:0",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 100,
+      "blob_weights" : 11,
+      "type" : "inner_product",
+      "has_relu" : 1,
+      "bottom" : "Reshape_1:0",
+      "blob_biases" : 9,
+      "has_tanh" : 0,
+      "name" : "MatMul_2",
+      "has_prelu" : 0
+    },
+    {
+      "nB" : 100,
+      "top" : "Add_3:0",
+      "has_biases" : 1,
+      "weights" : {
+
+      },
+      "nC" : 10,
+      "blob_weights" : 15,
+      "type" : "inner_product",
+      "has_relu" : 0,
+      "bottom" : "Relu_5:0",
+      "blob_biases" : 13,
+      "has_tanh" : 0,
+      "name" : "MatMul_3",
+      "has_prelu" : 0
+    },
+    {
+      "axis_mode" : 4,
+      "bottom" : "Add_3:0",
+      "weights" : {
+
+      },
+      "mode" : 11,
+      "use_version" : 1,
+      "top" : "op_to_store__0",
+      "type" : "reduce",
+      "name" : "op_to_store:0"
+    }
+  ]
+}
